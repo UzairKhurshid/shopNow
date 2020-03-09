@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../../">
+        <title>Add Product</title>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+
+        <!-- Page Content  -->
+        <div id="content">
+            
+            <div class="col-lg-4 col-md-6 mb-5">
+            <div class="product-item">
+              <figure>
+                <img src="images/model_3_bg.jpg" alt="Image" class="img-fluid" width="500px" height="500px">
+              </figure>
+              <div class="px-4">
+                <form action="/addProduct" method="POST">
+                        <tr>
+                            <th><h3>Image of Product</h3></th>
+                            <input type="file" name="avatar" accept="image/*" required>
+                        </tr>
+                        <tr>
+                            <th><h3>Name of Product</h3></th>
+                            <td><input type="text"  class="input100" name="nameOfProduct" required></td>
+                        </tr>
+                        <tr>
+                            <th><h3>Price of Product</h3></th>
+                            <td><input type="number" class="input100" name="priceOfProduct" required></td>
+                        </tr>
+                        {{#if blog}}
+                            <tr>
+                              <th><h3>Author Name</h3></th>
+                              <td><input  class="input100" name="authorName" required></td>
+                            </tr>
+                            <tr>
+                              <th><h3>posting Date</h3></th>
+                              <td><input  class="input100"  type="date" name="postingDate" required></td>
+                            </tr>
+                            <tr>
+                              <th><h3>Blog About Your Product</h3></th>
+                              <td><input   class="input100" name="blogOfProduct" required></td> 
+                            </tr>
+                        {{/if}}
+                        <br><br>
+                        <tr>
+                            <button class="profile100-form-btn" type="submit">Add Product</button>
+                        </tr>
+                </form>
+              </div>
+            </div>
+          </div>
+		
+
+        </div>
+    </div>
+    </body>
+</html>

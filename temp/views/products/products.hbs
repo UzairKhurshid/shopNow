@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+        <title>Products</title>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+ 
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="product">
+              {{#if products}}
+                    {{#each products}}
+                        <figure>
+                            <img src="images/model_3_bg.jpg" alt="Image" class="img-fluid" width="500px" height="500px">
+                        </figure>
+                        <tr>
+                            <label style="font-size: 20px;">Name Of Product</label>
+                            <h3 style="font-size: 15px;">{{this.nameOfProduct}}</h3>
+                        </tr>
+                        <tr>
+                            <label style="font-size: 20px;">Price Of Product</label>
+                            <h3 style="font-size: 15px;">{{this.priceOfProduct}}</h3>
+                        </tr>
+                        <tr>
+                            <label style="font-size: 20px;">Email of Owner</label>
+                            <h3 style="font-size: 15px;">{{this.ownerEmail}}</h3>
+                        </tr>
+                        <tr>
+                        <form action="/editProduct" method="POST">
+                            <input type="hidden" name="productID" value={{this._id}}>
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/deleteProduct" method="POST">
+                            <input type="hidden" name="productID" value={{this._id}}>
+                            <button type="submit">Delete</button>
+                        </form>
+                        </tr>
+                    {{/each}}
+                {{else}}
+                        <h1>No Product Found</h1>
+                {{/if}}
+        </div>
+    </div>
+    </div>
+    </body>
+</html>

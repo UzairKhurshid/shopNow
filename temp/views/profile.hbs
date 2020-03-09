@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+        <title>Profile</title>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="main-content">
+            
+            <div class="row">
+                <div  class="col-md-3"></div>
+                <div  class="col-md-6" >
+                    
+                    <form action="/updateProfile" method="POST" onsubmit="return check(this)">
+                    <img src="/images/user.png"  id="profileImg"><br><br>
+                    <input type="file" name="avatar" required> <br><br>
+                    <div class="profile-input100 ">
+                        <label>{{rolehbs}}</label>
+                    </div>
+                    <div  data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username"  required value={{username}}>
+					</div>
+                    <div  data-validate = "Enter Email">
+						<input class="input100" type="email" name="email" placeholder="Email" required readonly value={{email}}>
+					</div>
+
+					<div  data-validate="Enter password">
+						<input class="input100" type="password" name="password" id="password" placeholder="Password" required  >
+					</div>
+                    <div  data-validate="Enter confirm password">
+						<input class="input100" type="password" name="confirmPassword" id="confirmPassword"  placeholder="Confirm Password" required onfocusout="validatePassword()">
+					</div>
+					<div class="profile-input100 " >
+						<p id="pError" style="color: red;" >{{Error}}</p>
+					</div>
+                    
+						<button class="profile100-form-btn" type="submit">Update</button>
+					
+                    </form>
+
+
+                    <form action="/logout" method="POST">
+                        <button class="profile100-form-btn" type="submit">  
+							Add Account
+						</button>
+                    </form>
+                    <form action="/delAccount" method="POST">
+                        <button class="profile100-form-btn" type="submit">Delete Account</button>
+                    </form>
+                </div>
+                <div  class="col-md-3"></div>
+
+            </div>
+        </div>
+
+        </div>
+    </div>
+    
+<script>
+        
+
+        const password=document.getElementById('password')
+        const confirmPassword=document.getElementById('confirmPassword')
+        const p=document.getElementById('p')
+        
+
+        var check = function() {
+            
+            if (password.value.length < 6) {
+                p.innerHTML='password length should be greater then 6 digits' 
+                p.style.color='red'
+                return false;             }
+            if (password.value == confirmPassword.value) {
+                p.innerHTML=''
+            } else {
+                p.innerHTML='wrong password'
+                p.style.color='red'
+                return false
+            }
+        }
+        
+    </script>
+    </body>
+</html>

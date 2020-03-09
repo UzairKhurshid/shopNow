@@ -1,0 +1,150 @@
+creating app.js file
+    to run this file node app.js
+
+initilizing npm using npm init -y. this will create package.json file where we can store our depandancies.
+
+installing npm nodemon:
+    npm install --save-dev nodemon@1.19.3
+    adding script to package.json file 
+        "start": "node app.js",  --> using npm start run app.js
+        "dev": "nodemon src/app.js -e js,hbs"  --> using npm run dev run app.js
+
+installing npm express using npm i express@4.17.1 
+    require in app.js
+        const express=require('express')
+        const app=express()
+        //route
+        app.get('',(req,res)=>{
+            res.send('hello')
+        })
+        app.get('.index',(req,res)=>{
+            res.send('<h1>Sending html tag in response</h1>')
+        })
+        app.get('.index',(req,res)=>{
+            res.send({
+                name:'sending data in json format'
+            })
+        })
+        //to start server
+        app.listen(3000,()=>{
+            console.log('Server is up and running on port 3000')
+        })
+
+
+to render dynamic pages using templeting engine we create a folder views in application 
+becuse when we use templeting engine this looks for files in views folder then add hbs files in views.
+    install hbs npm i hbs@4.0.0
+    const hbs=require('hbs') in app,js
+    now tell express that which templeting engine u are using in app.js:
+        app.set('view engine','hbs')
+        app.get('',(req,res)=>{
+            res.render('index')
+        })
+
+if you are not putting your hbs files in root views folder like in you have temp folder in which u have another
+folder views in which ur hbs lies you have to specify the path to that view folder in app.js like this
+    const viewDirectory=path.join(__dirname,'../temp/views')
+    app.set('views',viewDirectory)
+
+now we can use partials header footer from partials folder by registering them like this.
+    create partials folder in temp then create 2 files header and footer add in every hbs file
+    and in app.js
+        const partialsDirectory=path.join(__dirname,'../temp/partials')
+        hbs.registerPartials(partialsDirectory)
+
+        
+to use css images js we create a folder public and then add sub folders css images and js
+set public directory in app.js by:
+    const path=require('path')
+    const publicDirectory=path.join(__dirname,'../public')
+    app.use(express.static(publicDirectory))
+
+
+to fetch data in json form from request body we use npm body parser to convert data in chunks in json form
+so for that we add this in app.js :
+    first run npm i body-parser@1.19.0
+    const body-parser=require(''body-parser)
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(bodyParser.json())
+
+
+
+creating folders:
+    Src
+    1:db folder and mongoose file in it.
+    2:Expressmiddleware in which your middlewares lies auth.js
+    3:models in which your mongoose models lies.
+    4:routes in which all of your routes lies
+
+router folder:
+    const express=require('express')
+    const router=new express.Router()
+    const User=require('../models/user')
+    const auth=require('../expressMiddleware/auth')
+    //your routes here
+    module.exports=router
+
+    2:and require this in app.js and make it use by our app
+    const userRoute=require('./routes/user')
+    app.use(userRoute)
+
+
+expressMiddleware:
+    in this folder your code if authentication lies here and you exoirt this file in routes file to autenticate routes
+
+db Steps:
+    www.mongodb.com download mongodb community server.
+    extract that folder and rename that folder with a simple name like mongodb
+    now move this folder to a permenant directory like in disk c in Users folder
+    now create another folder named as mongodb-data where we store our data for the database.
+    now you are ready to use mongodb from your terminal. write this in your terminal
+    clear terminal by cls. and type this
+    /Users/uzair/mongodb/bin/mongod.exe --dbpath=/Users/uzair/mongodb-data 
+    hit enter.
+
+    now download robo3t from www.robomongo.org to get a gui for your mongodb database.
+    open robo3t. and create your connection to database
+    in create new connection tab change 
+    Name:Local MongoDB Database
+    address:localhost
+    port:27017
+    click test button if successfull click save and connect to your database.0
+    db.version() in robo3t to check db version.
+    now to start working with mongodb from node we use a npm mongodb
+
+    npm i mongodb@2.2.0
+    you can use mongodb for your database but we add mongoose with database for more functionality
+    install mongoose 
+        npm i mongoose@5.7.5
+        open mongoose.js and write this to connect to your database like this.
+        const mongoose=require('mongoose')
+        mongoose.connect('mongodb:127.0.0.1:27017/application2',{
+            useNewUrlParser:true,
+            useCreateIndex:true
+        })
+
+    and call this file in your app.js
+    require('./db/mongoose')
+    create  models in models folder  file user.js
+
+to Use session in our app we use express-session to store data in session install npm ,
+    npm i express-session@1.17.0 and to add these session to store in db we use another npm
+    npm i connect-mongodb-session@2.2.0
+    then add this code in app.js
+        const session=require('express-session')
+        const mongoStoreSession=require('connect-mongodb-session')(session)
+        //in this we are creating a const store in which we are specifing db url and collection name where to save sessions
+        const dbStore=new mongoStoreSession({
+        uri:'mongodb://127.0.0.1:27017/application2',
+        collection:'sessions'
+        });
+        // we write this line to start working with session
+        app.use(session({
+        secret: 'Uzair Secret',
+        resave: false,
+        saveUninitialized: true,
+        store:dbStore
+        }))
+
+        and to use session we can write like this in any route in which we want to set our session
+            req.session.isLoggesIn=true   or anything you needed as per your requirement.

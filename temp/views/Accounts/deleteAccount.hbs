@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+        <title>delete Account</title>
+         <style>
+            #customers {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            }
+
+            #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+            }
+            button{
+                width: 100px;
+            }
+            button:hover{
+                background-color: #6d7fcc;
+                padding-right;: 20px;
+            }
+        </style>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+
+        <!-- Page Content  -->
+        <div id="content">
+
+                <div class="Container">    
+            <div class="row">
+                <div id="col1" class="col-md-3"></div>
+                <div id="col2" class="col-md-6" >
+                    <h1>Accounts</h1>
+                   <table id="customers">
+                        <tr>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th></th>
+                            <th>Action</th>
+
+                        </tr>
+                        {{#if accounts}}
+                            {{#each accounts}}
+                                <tr>
+                                    <form action="/deleteAccount" method="POST">
+                                    <td >{{this.username}}</td>
+                                    <td >{{this.email}}</td>
+                                    <td >{{this.role}}</td>
+                                    <td><input type="hidden" name="email" value={{this.email}}></td>
+                                    <td><button type="submit">Delete</button></td>
+                                    
+                                    </form>
+                                </tr>
+                            {{/each}}
+                        {{else}}
+                            <td>No Account Found</td>
+                        {{/if}}
+                        
+                        </table>
+                        
+                </div>
+                <div id="col3" class="col-md-3"></div>
+            </div>
+    </div>
+        
+        </div>
+    </div>
+    </body>
+</html>
+

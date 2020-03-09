@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.min.js"></script>
+    <title>Nodejs</title>
+</head>
+
+<body>
+    <div class="Container">    
+            <div class="row">
+                <div id="col1" class="col-md-3"></div>
+                <div id="col2" class="col-md-6" >
+                        <h1>Login</h1>
+                    <form action="/login" method="POST">
+                        <tr><br></tr>
+                        <tr>
+                        <th><label class="label control-label">Email</label></th>
+                        <td><input type="email" class="form-control" name="txtEmail" id="txtEmail" required placeholder=" email"  value={{txtEmail}}></td>
+                        </tr>
+                        <tr>
+                        <th><label class="label control-label">Password</label></th>
+                        <td><input type="password" class="form-control" name="txtPassword" id="txtPassword" required placeholder="Password" value={{txtPassword}} ></td>
+                        </tr>
+                        <tr>
+                            <td><p style="color: red; "> {{error}} </p></td>
+                        </tr>
+                        <button class="btnSubmit">Login</button>
+                        <br>
+                        <a href="/signup">create Account ?</a>
+                    </form>
+                </div>
+                <div id="col3" class="col-md-3"></div>
+            </div>
+    </div>
+</body>
+
+</html>

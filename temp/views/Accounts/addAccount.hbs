@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+        <title>Add Account</title>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+
+        <!-- Page Content  -->
+        <div id="content">
+
+		<div class="limiter">
+			<div class="container-login100">
+			<div class="wrap-login100 p-t-85 p-b-20">
+                
+				<form  method="POST" action="/addAccount" class="login100-form validate-form" >
+						<input type="file" id="uploadImg" name="avatar" accept="image/*" required>
+					<div validate-input m-t-85 m-b-35" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username" required>
+					</div>
+                    <div  validate-input m-t-85 m-b-35" data-validate = "Enter Email">
+						<input class="input100" type="email" name="email" placeholder="Email" required>
+					</div>
+
+					<div validate-input m-b-50" data-validate="Enter password">
+						<input class="input100" type="password" name="password" id="password" placeholder="Password" required  >
+					</div>
+                    <div validate-input m-b-50" data-validate="Enter confirm password">
+						<input class="input100" type="password" name="confirmPassword" id="confirmPassword"  placeholder="Confirm Password" required onfocusout="validatePassword()">
+					</div>
+                    <div class="input100 validate-input m-b-50">
+                        <select name="role" style="width: 100px; background-color: DodgerBlue;padding: 8px 16px;position: relative; font-family: Arial; margin-top: 5px;margin-bottom: 10px;width: 380px;">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+					<div class="input100 validate-input m-b-50" >
+						<p id="pError" style="color: red;" >{{Error}}</p>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Add Account
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+        </div>
+    </div>
+	<script>
+
+	
+
+function validatePassword(){
+	var password = document.getElementById("password");
+	var confirmPassword = document.getElementById("confirmPassword");
+
+	if(password.value != confirmPassword.value){
+		document.getElementById("pError").innerHTML="Password Does'nt Match"
+		document.getElementById("confirmPassword").focus();
+	}
+	else{
+		document.getElementById("pError").innerHTML=""
+	}
+}
+
+
+</script>
+    </body>
+</html>

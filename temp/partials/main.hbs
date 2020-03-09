@@ -1,0 +1,49 @@
+
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><a href="/">ShopNow<img src="/images/shop.png" style="height: 30px;width:30px;margin-left: 20px ;"></a></h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p><a href="/dashboard">Home</a></p>
+                <li class="active">
+                    <a href="/products" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Products</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/addProduct">Add Product</a>
+                            <a href="/addBlogProduct">Add Blog Product</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Orders</a>
+                </li>
+                {{#if role}}
+                <li>
+                    <a href="/Accounts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Accounts</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/addAccount">Add Account</a>
+                        </li>
+                        <li>
+                            <a href="/deleteAccount">Delete Account</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/contact">Contact</a>
+                </li>
+                <li>
+                    <a href="/profile">Profile</a>
+                </li>
+                
+                {{else}}
+                    <li>
+                        <a href="/profile">Profile</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </nav>
+ 
+ 

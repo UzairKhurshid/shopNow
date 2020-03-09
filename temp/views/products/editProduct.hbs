@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+        <title>Edit Product</title>
+    </head>
+    <body>
+           <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>main}}
+
+        <!-- Page Content  -->
+        <div id="content">
+
+             <div class="col-lg-4 col-md-6 mb-5">
+            <div class="product-item">
+              <figure>
+                <img src="images/model_3_bg.jpg" alt="Image" class="img-fluid" width="500px" height="500px">
+              </figure>
+              <div class="px-4">
+                <form action="/updateProduct" method="POST">
+                        <tr>
+                            <th><h3>Product Image</h3></th>
+                            <input type="file" name="avatar" accept="image/*" required>
+                        </tr>
+                        <tr>
+                          <td><input type="hidden" name="productID" required  value={{productID}} ></td>
+                        </tr>
+                        <tr>
+                            <th><h3>Name of Product</h3></th>
+                            <td><input type="text" name="nameOfProduct" required  value={{nameOfProduct}} ></td>
+                        </tr>
+                        <tr>
+                            <th><h3>Price of Product</h3></th>
+                            <td><input type="number" name="priceOfProduct" required value={{priceOfProduct}}></td>
+                        </tr>
+                        <tr>
+                            <td><input type="hidden" name="ownerEmail" required readonly value={{ownerEmail}}></td>
+                        </tr>
+                        <tr>
+                            <button type="submit">Update Product</button>
+                        </tr>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    </body>
+</html>
